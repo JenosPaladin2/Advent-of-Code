@@ -1,0 +1,13 @@
+Advent of Code
+
+1. Aufgabe:
+
+Kalorien zählen
+Was muss gemacht werden?
+Zahlen werden nacheinander geschrieben (mit Zeilenumbruch). Wenn ein leerer Zeilenumbruch ist, dann bedeutet es, dass es zu einer anderen Person gehört.
+
+Vorgehen:
+1. Zahlen in ein Array packen. Neuer Eintrag ist ein leerer Zeilenumbruch
+2. Zahlen innerhalb des Arrays summieren
+
+Vorschlag: Wie wäre es mit einem multidimensionalem Array (array in einem Array)?
