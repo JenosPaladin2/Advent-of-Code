@@ -4,12 +4,12 @@ let relativePathExampleFile = "./SecondTaskExample.txt";
 let relativePathFirstTask = "./SecondTask.txt";
 
 let data = fs.readFileSync(relativePathFirstTask, "utf8");
-
 let rockPaperScissorInput = createArrayFromString(data);
 
-console.log(rockPaperScissorInput);
 
-processRockPaperScissorInput();
+console.log(rockPaperScissorInput);
+console.log(parentClass());
+//processInput();
 
 /*
 Vorüberlegung:
@@ -31,11 +31,12 @@ function createArrayFromString(text) {
   function processRockPaperScissorInput(){
     var oponentOptions = ['A', 'B', 'C']; //Rock, Paper, Scissor
     var myOptions =['X', 'Y', 'Z']; //Rock, Paper, Scissor
-    var table;
-
+    var table = [['A X'],['A Y'],['A Z'],['B X'],['B Y'],['B Z'],['C X'],['C Y'],['C Z']];
     for(let i=0; i< table.length; i++){
-      console.log(table);
+      console.log(table[i][0]);
     }
+
+
     //Rock wins Scissors, Loose against Paper
     //Paper wins Rock, Loose against Scissors
     //Scissor wins Paper, Loose against Rock
