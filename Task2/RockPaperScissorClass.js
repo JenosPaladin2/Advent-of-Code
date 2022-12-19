@@ -1,6 +1,6 @@
-function parentClass(){
-    return object = {
-        game: "",
-        score: 0
+class GameScore{
+    constructor(game, score){
+        this.game = game;
+        this.score = score;
     }
 }
