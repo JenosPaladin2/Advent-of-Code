@@ -4,8 +4,8 @@ let relativePathExampleFile = "./SecondTaskExample.txt";
 let relativePathFirstTask = "./SecondTask.txt";
 
 let data = fs.readFileSync(relativePathFirstTask, "utf8");
-
 let rockPaperScissorInput = createArrayFromString(data);
+
 
 console.log(rockPaperScissorInput);
 
