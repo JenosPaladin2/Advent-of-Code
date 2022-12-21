@@ -9,7 +9,7 @@ let rockPaperScissorInput = createArrayFromString(data);
 
 console.log(rockPaperScissorInput);
 
-processRockPaperScissorInput();
+processRockPaperScissorInput(rockPaperScissorInput);
 
 /*
 Vorüberlegung:
@@ -28,14 +28,26 @@ function createArrayFromString(text) {
     return text.split(/\r?\n/);
   }
 
-  function processRockPaperScissorInput(){
-    var oponentOptions = ['A', 'B', 'C']; //Rock, Paper, Scissor
-    var myOptions =['X', 'Y', 'Z']; //Rock, Paper, Scissor
-    var table;
+  function processRockPaperScissorInput(table){
+//    let oponentOptions = ['A', 'B', 'C']; //Rock, Paper, Scissor
+//    let myOptions =['X', 'Y', 'Z']; //Rock, Paper, Scissor
+    
+    let gameProperties = {
+      enemyScore: 0,
+      myScore: 0,
+    }
+
+    let enemyScore = 0;
+    let myScore = 0;
 
     for(let i=0; i< table.length; i++){
-      console.log(table);
+      console.log(table[i]);
+      gameProperties = distributePointsBasedOnGame(table[i]);
+      enemyScore += gameProperties.enemyScore;
+      myScore += gameProperties.myScore;
     }
+
+    console.log('Enemy Total Score: '+enemyScore + ' my score: '+myScore);
     //Rock wins Scissors, Loose against Paper
     //Paper wins Rock, Loose against Scissors
     //Scissor wins Paper, Loose against Rock
@@ -43,6 +55,22 @@ function createArrayFromString(text) {
     //Win +6
     //Loose +0
     //Draw +3
+  }
+
+  function distributePointsBasedOnGame(game){
+    let decisions = ['A X', 'A Y', 'A Z', 'B X', 'B Y', 'B Z', 'C X', 'C Y', 'C Z'];
+    //Rock +1, Paper +2, Scissor +3
+    let enemyScoreTable = [4,1,7,8,5,2,3,9,6];
+    let myScoreTable = [4,8,3,1,5,9,7,2,6];
+
+    let decisionsIndex = decisions.indexOf(game);
+    let enemyScore = enemyScoreTable[decisionsIndex];
+    let myScore = myScoreTable[decisionsIndex];
+
+    return {
+      enemyScore: enemyScore,
+      myScore: myScore
+    }
   }
 
 
