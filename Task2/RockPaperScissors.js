@@ -3,9 +3,8 @@ const fs = require("fs");
 let relativePathExampleFile = "./SecondTaskExample.txt";
 let relativePathFirstTask = "./SecondTask.txt";
 
-let data = fs.readFileSync(relativePathFirstTask, "utf8");
+let data = fs.readFileSync(relativePathExampleFile, "utf8");
 let rockPaperScissorInput = createArrayFromString(data);
-
 
 console.log(rockPaperScissorInput);
 
@@ -61,7 +60,9 @@ function createArrayFromString(text) {
     let enemyScoreTable = [4,1,7,8,5,2,3,9,6];
     let myScoreTable = [4,8,3,1,5,9,7,2,6];
 
-    let decisionsIndex = decisions.indexOf(game);
+    let gameWithNewStragety = applyWinStrategy(game);
+
+    let decisionsIndex = decisions.indexOf(gameWithNewStragety);
     let enemyScore = enemyScoreTable[decisionsIndex];
     let myScore = myScoreTable[decisionsIndex];
 
@@ -71,6 +72,47 @@ function createArrayFromString(text) {
     }
   }
 
+  //second half of the puzzle
+  function applyWinStrategy(gameDecisions){
+    let newGameDecisions = [];
+    let gameDecision = "";
+    for(let i = 0; i < gameDecisions.length; i++){
+      gameDecision = gameDecisions[i];
+      newGameDecisions[i] = chooseRockPaperScissorBasedOnEnemyInput(gameDecision);
+      console.log('newDecision[i]: '+newGameDecisions[i]);
+    }
+    return newGameDecisions;
+  }
+
+function chooseRockPaperScissorBasedOnEnemyInput(gameDecision){
+  let newDecision = "";
+
+  if(gameDecision.includes('A')){
+    newDecision = chooseRockOnEnemyRock(gameDecision);
+    console.log(newDecision);
+  }else if(gameDecision.includes('B)')){
+    newDecision = choosePaperOnEnemyPaper(gameDecision);
+  }else if(gameDecision.includes('C')){
+    newDecision = chooseRockOnEnemyScissor(gameDecision);
+  }
+  return newDecision;
+}
+
+function chooseRockOnEnemyRock(gameDecision){
+  let regEx = /[Y,Z]/g
+  console.log('chooseRockOnEnemyRock ergebnis: '+gameDecision.replace(regEx, "X"));
+    return gameDecision.replace(regEx,"X");
+}
+
+function choosePaperOnEnemyPaper(gameDecision){
+  let regEx = /[X,Z]/g
+    return gameDecision.replace(regEx,"Y");
+}
+
+function chooseRockOnEnemyScissor(gameDecision){
+  let regEx = /[X,Y]/g
+    return gameDecision.replace(regEx,"X");
+}
 
 function hasEmptyValueOnIndex(array, number) {
     return array[number] == "";
