@@ -145,14 +145,3 @@ function getWin(gameDecision) {
 function hasEmptyValueOnIndex(array, number) {
   return array[number] == "";
 }
-
-function convertStringIntoNumberArray(array) {
-  let newArray = [];
-  let value = 0;
-
-  for (let i = 0; i < array.length; i++) {
-    value = !hasEmptyValueOnIndex(array, i) ? parseInt(array[i]) : array[i];
-    newArray.push(value);
-  }
-  return newArray;
-}
