@@ -3,13 +3,30 @@ const fs = require("fs");
 let relativePathExampleFile = "./ThirdTaskExample.txt";
 let relativePathFirstTask = "./ThirdTask.txt";
 
-let data = fs.readFileSync(relativePathExampleFile, "utf8");
+let data = fs.readFileSync(relativePathFirstTask, "utf8");
 let rucksackInput = createArrayFromString(data);
 
-let allRucksacks = printText(rucksackInput);
-//console.log("das ist final: " + JSON.stringify(allRucksacks, null, 2));
+let allRucksacks = createMultipleRucksacks(rucksackInput);
+//console.log(allRucksacks);
+let totalSumPriority = calculateTotalSumPriorities(allRucksacks);
+console.log(totalSumPriority);
 
-function printText(input) {
+
+function calculateTotalSumPriorities(array){
+    let sumPriority = 0;
+    for(let i = 0; i < array.length; i++){
+        sumPriority += array[i].priorities;
+    }
+    return sumPriority;
+}
+
+
+function createArrayFromString(text) {
+  return text.split(/\r?\n/);
+}
+
+
+function createMultipleRucksacks(input) {
   let rucksacks = [];
   let rucksack = {};
 
@@ -19,11 +36,44 @@ function printText(input) {
       rucksack.firstCompartment,
       rucksack.secondCompartment
     );
-
+    if(rucksack.firstCompartment.length !== rucksack.secondCompartment.length){
+}
     rucksack.priorities = calculatePriorities(rucksack.sameCharacters);
     rucksacks.push(rucksack);
   }
   return rucksacks;
+}
+
+
+function getSameCharacterFromTexts(firstText, secondText) {
+  let sameCharacters = [];
+  for (let i = 0; i < firstText.length; i++) {
+    for (let j = 0; j < secondText.length; j++) {
+      if (firstText.charAt(i) === secondText.charAt(j)) {
+        if (sameCharacters.indexOf(secondText.charAt(j)) == -1) {
+          sameCharacters.push(secondText.charAt(j));
+        }
+      }
+    }
+  }
+  return sameCharacters;
+}
+
+function splitTextInHalf(text) {
+  let middle = text.length / 2;
+  let object = _createRucksackObject();
+  object.firstCompartment = text.substring(0, middle).trim();
+  object.secondCompartment = text.substring(middle).trim();
+  return object;
+}
+
+function _createRucksackObject() {
+  return {
+    firstCompartment: "",
+    secondCompartment: "",
+    sameCharacters: [],
+    priorities: 0,
+  };
 }
 
 function calculatePriorities(sameCharacters) {
@@ -83,44 +133,8 @@ function calculatePriorities(sameCharacters) {
   ];
 
   let priorities = 0;
-  console.log("Das ist sameCharacters: " + sameCharacters);
   for (let i = 0; i < sameCharacters.length; i++) {
-    priorities += alphabet.indexOf(sameCharacters) + 1; //because index starts with 0
+    priorities += alphabet.indexOf(sameCharacters[i]) + 1; //because index starts with 0
   }
   return priorities;
-}
-
-function getSameCharacterFromTexts(firstText, secondText) {
-  let sameCharacters = [];
-  for (let i = 0; i < firstText.length; i++) {
-    for (let j = 0; j < secondText.length; j++) {
-      if (firstText.charAt(i) === secondText.charAt(j)) {
-        if (sameCharacters.indexOf(secondText.charAt(j)) == -1) {
-          sameCharacters.push(secondText.charAt(j));
-        }
-      }
-    }
-  }
-  return sameCharacters;
-}
-
-function createArrayFromString(text) {
-  return text.split(/\r?\n/);
-}
-
-function splitTextInHalf(text) {
-  let middle = text.length / 2;
-  let object = _createRucksackObject();
-  object.firstCompartment = text.substring(0, middle);
-  object.secondCompartment = text.substring(middle + 1);
-  return object;
-}
-
-function _createRucksackObject() {
-  return {
-    firstCompartment: "",
-    secondCompartment: "",
-    sameCharacters: [],
-    priorities: 0,
-  };
 }
