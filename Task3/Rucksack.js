@@ -13,11 +13,14 @@ console.log(totalSumPriority);
 
 
 function calculateTotalSumPriorities(array){
+    return array.reduce((sum, rucksack) => sum + rucksack.priorities, 0);
+    /*
     let sumPriority = 0;
     for(let i = 0; i < array.length; i++){
         sumPriority += array[i].priorities;
     }
     return sumPriority;
+    */
 }
 
 
