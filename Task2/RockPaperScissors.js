@@ -6,7 +6,7 @@ let relativePathFirstTask = "./SecondTask.txt";
 let data = fs.readFileSync(relativePathFirstTask, "utf8");
 let rockPaperScissorInput = createArrayFromString(data);
 
-console.log(rockPaperScissorInput);
+//console.log(rockPaperScissorInput);
 
 let result = processRockPaperScissorInput(rockPaperScissorInput);
 
@@ -27,7 +27,7 @@ function processRockPaperScissorInput(table) {
   let myScore = 0;
 
   let gameWithNewStragety = applyWinStrategy(table);
-  console.log(gameWithNewStragety);
+  //console.log(gameWithNewStragety);
 
   for (let i = 0; i < gameWithNewStragety.length; i++) {
     gameProperties = distributePointsBasedOnGame(gameWithNewStragety[i]);
